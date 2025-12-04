@@ -1,164 +1,124 @@
-/* ------------------------------
-   Global styles
---------------------------------*/
-:root {
-    --primary-color: #005bbb;
-    --secondary-color: #ff7b00;
-    --white-color: #ffffff;
-    --text-color: #333;
-    --bg-light: #f8f9fa;
+:root{
+/* === Color Variables === */
+    --primary-color: lch(24.04% 88.8 310.72);
+    --secondary-color: lch(60.08% 72.97 131.82);
+    --black-color: lch(8.87% 0.52 19.29);
+    --white-color: lch(93.35% 1.42 19.06);
+    --font-family: 'Arial, sans-serif'; 
 
-    --font-size-large: 2.5rem;
-    --font-size-medium: 1.125rem;
-    --font-size-small: 0.9rem;
+/* === Font Size Variables === */
+    --font-size-small: clamp(12px, 1.5vw, 16px);
+    --font-size-medium: clamp(16px, 2vw, 20px);
+    --font-size-large: clamp(24px, 3vw, 32px);
 
-    --spacing-large: 4rem;
-    --spacing-medium: 2rem;
-    --spacing-small: 1rem;
+/* === Spacing Variables === */
+    --spacing-small: clamp(4px, 2vw, 8px);
+    --spacing-medium: clamp(12px, 3vw, 24px);
+    --spacing-large: clamp(24px, 4vw, 48px);  
 
-    --radius: 10px;
-    --shadow-soft: 0 4px 12px rgba(0,0,0,0.1);
+/* === Border Radius Variables === */
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 16px;    
+
+/* === Box Shadow Variables === */
+    --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --box-shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --box-shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.2);
+    
+/* === Transition Variables === */
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-medium: all 0.4s ease-in-out;
+    --transition-slow: all 0.6s ease-in-out;
+
+/* === Typography Variables === */
+    --title: 'Helvetica Neue', sans-serif;
+    --paragraph: 'Georgia', serif;
+    
 }
 
-/* Better global reset */
+/* === Reset CSS === */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
 }
 
 body {
-    font-family: "Inter", Arial, sans-serif;
-    color: var(--text-color);
-    background-color: var(--bg-light);
-    line-height: 1.6;
+    font-family: var(--font-family);
+    background-color: var(--white-color);
+    color: var(--black-color);
 }
 
-/* ------------------------------
-   Navbar
---------------------------------*/
-.header {
-    background: var(--white-color);
-    padding: var(--spacing-small) 0;
-    box-shadow: var(--shadow-soft);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* === main container for container queries === */
+.container {
+    container-type: inline-size;
+    container-name: main-container;  
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-medium);
 }
+
+/* === Header === */
 
 .navbar {
-    max-width: 1200px;
-    margin: auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 var(--spacing-medium);
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding: var(--spacing-large);
 }
-
-.link-nav a {
-    margin-left: var(--spacing-small);
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.link-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* ------------------------------
-   Hero section
---------------------------------*/
-.hero-section {
-    padding: var(--spacing-large) var(--spacing-medium);
-    text-align: center;
-    background: linear-gradient(
-        to bottom right,
-        var(--primary-color),
-        var(--secondary-color)
-    );
+.navbar a {
     color: var(--white-color);
+    text-decoration: none;
+    margin: 10px;
+}
+.link-nav a {
+    margin: 10px;
+    font-size: var(--font-size-medium);
+}
+
+:is(.link-nav a:hover, .link-nav a:focus) {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+}
+
+/* === Hero Section === */
+.hero-section {
+    padding: var(--spacing-large);
+    text-align: center;
+    overflow: hidden;
 }
 
 .hero-content h1 {
     font-size: var(--font-size-large);
-    margin-bottom: var(--spacing-small);
-    font-weight: 700;
+    margin-bottom: var(--spacing-medium);
+    --color-feature: var(--secondary-color);
+}
+
+.hero-content:has(.btn:hover) h1 {
+    --color-feature: var(--primary-color);
 }
 
 .hero-content p {
+    color: var(--color-feature);
     font-size: var(--font-size-medium);
     max-width: 600px;
-    margin: 0 auto var(--spacing-medium);
-    opacity: 0.9;
+    margin-bottom: var(--spacing-large);
 }
-
-/* ------------------------------
-   Buttons
---------------------------------*/
 .btn {
     background-color: var(--secondary-color);
     color: var(--white-color);
-    padding: 12px 26px;
-    font-size: 1rem;
     border: none;
-    border-radius: var(--radius);
+    padding: 10px 20px;
     cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 600;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: var(--shadow-soft);
+    border-radius: 10px;
 }
-
 .btn:hover {
     background-color: var(--primary-color);
-    transform: translateY(-2px);
 }
-
-/* ------------------------------
-   Projects section
---------------------------------*/
-.projects-section {
-    max-width: 1200px;
-    margin: auto;
-    padding: var(--spacing-large) var(--spacing-medium);
-    text-align: center;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-medium);
-    margin-top: var(--spacing-medium);
-}
-
-.project-card {
-    background: var(--white-color);
-    padding: var(--spacing-medium);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-soft);
-    transition: transform 0.2s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-card img {
-    width: 100%;
-    border-radius: var(--radius);
-    margin-bottom: var(--spacing-small);
-}
-
-/* ------------------------------
-   Footer
---------------------------------*/
-footer {
-    text-align: center;
-    padding: var(--spacing-medium);
-    background: var(--primary-color);
+a.btn {
     color: var(--white-color);
-    margin-top: var(--spacing-large);
+    text-decoration: none;
 }
